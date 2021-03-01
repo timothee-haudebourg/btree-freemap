@@ -1,13 +1,8 @@
-#![feature(min_const_generics)]
-
 use std::ops::Range;
 use slab::Slab;
-use linear_btree::{
-	map::{
-		BTreeMap,
-		BTreeExt
-	},
-	node::Item
+use btree_slab::{
+	BTreeMap,
+	generic::map::BTreeExtMut
 };
 
 mod btree;

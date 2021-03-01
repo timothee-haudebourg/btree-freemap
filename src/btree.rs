@@ -1,12 +1,13 @@
-use std::ops::Range;
-use linear_btree::{
-	map::{
-		BTreeMap,
-		BTreeExt
-	},
-	node::{
-		ItemAddr,
-		Node
+use btree_slab::{
+	BTreeMap,
+	generic::{
+		map::{
+			BTreeExt
+		},
+		node::{
+			Address as ItemAddr,
+			Node
+		},
 	},
 	utils::binary_search_min
 };
@@ -35,7 +36,7 @@ impl<T: Address> BTreeFreeMap<T> for BTreeMap<T, usize> {
 		loop {
 			match free_range_offset_in(self.node(id), len, strategy) {
 				Ok((offset, actual_len)) => {
-					return Some((ItemAddr::new(id, offset), actual_len))
+					return Some((ItemAddr::new(id, offset.into()), actual_len))
 				},
 				Err(None) => {
 					return None
